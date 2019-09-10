@@ -16,6 +16,7 @@ function start() {
     fontSizes['Extra Large'] =  '24pt' ;
     fontSizes['XXL'] =  '32pt' ;
     var timeOut;
+
     var animate = function () {
         start.disabled = "disabled";
         stop.disabled = "";
@@ -28,13 +29,12 @@ function start() {
         }
 
         document.getElementById('text-area').style.fontSize =fontSizes[fontSize.value];
-        var arr =  ANIMATIONS[animation.value].split("=====\n");
-        console.log(arr[0]);
-        var a = 0;
+        var flames =  ANIMATIONS[animation.value].split("=====\n");
+        var curFlame = 0;
         timer = window.setInterval(function () {
-            document.getElementById('text-area').value = arr[a++];
-            if(a == arr.length){
-                a = 0;
+            document.getElementById('text-area').value = flames[curFlame++];
+            if(curFlame == flames.length){
+                curFlame = 0;
             }
         },timeOut);
 
@@ -48,6 +48,7 @@ function start() {
     }
     document.getElementById('turbo').onchange =function () {
             if(start.disabled) {
+                window.clearInterval(timer);
                 animate();
             }
 
